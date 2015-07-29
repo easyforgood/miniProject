@@ -21,7 +21,6 @@ public class FlyPaperPlaneDetailResponse implements JSONParseInterface<String> {
     @Override
     public String parseJSONObject(JSONObject resultJson) throws JSONException {
         String data=resultJson.getString("data");
-
         return data;
     }
 

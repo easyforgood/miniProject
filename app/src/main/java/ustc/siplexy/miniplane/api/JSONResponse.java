@@ -5,24 +5,26 @@ package ustc.siplexy.miniplane.api;/**
 import android.util.Log;
 
 import com.android.volley.Response;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.VolleyError;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ustc.siplexy.miniplane.ustc.siplexy.miniplane.httpclient.UIListenerInterface;
+import javax.xml.transform.ErrorListener;
+
+import ustc.siplexy.miniplane.api.httpclient.UIListenerInterface;
 
 /**
  * Created with Android Studio.
  *
  * @Project:
  * @Package:
- * @Description:
+ * @Description: 通用解析
  * @author:
  * @date:
  * @version: V1.0
  */
-public class JSONResponse implements Response.Listener<JSONObject>{
+public class JSONResponse implements Response.Listener<JSONObject>,Response.ErrorListener{
     private UIListenerInterface uiListener=null;
     private JSONParseInterface parseJson=null;
 
@@ -37,11 +39,19 @@ public class JSONResponse implements Response.Listener<JSONObject>{
     public void onResponse(JSONObject jsonObject) {
         if (uiListener!=null && parseJson!=null){
             try {
+                //解析数据，回掉UI操作接口
                 uiListener.onSuccess(parseJson.parseJSONObject(jsonObject));
             } catch (JSONException e) {
                 Log.e("Api", "json parse wrong");
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+
+        uiListener.onError(error);
+        Log.e("TAG", error.getMessage(), error);
     }
 }

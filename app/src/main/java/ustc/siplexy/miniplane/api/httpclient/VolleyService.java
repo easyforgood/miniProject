@@ -1,4 +1,4 @@
-package ustc.siplexy.miniplane.ustc.siplexy.miniplane.httpclient;
+package ustc.siplexy.miniplane.api.httpclient;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -96,7 +96,8 @@ public class VolleyService {
     /*
        @TODO: ªÒ»°Õº∆¨
     */
-    public static void getImg(String url,ImageView view,int defaultImage,int faultImage){
+    public static void getImg(String reqUrl,ImageView view,int defaultImage,int faultImage){
+        String responseURL=getAbsoluteApiUrl(reqUrl);
         if (isQueueEmpty()){
             return;
         }
@@ -112,7 +113,7 @@ public class VolleyService {
         });
         ImageLoader.ImageListener listener = ImageLoader.getImageListener(view,
                 defaultImage, faultImage);
-        imageLoader.get("http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg", listener);
+        imageLoader.get(responseURL, listener);
     }
 
     public static String getAbsoluteApiUrl(String partUrl) {

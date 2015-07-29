@@ -7,13 +7,9 @@
 
 package ustc.siplexy.miniplane.api;
 
-import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.util.Log;
-import android.widget.BaseAdapter;
 
 import com.android.volley.Response;
-import com.android.volley.toolbox.ImageLoader;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,13 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.transform.ErrorListener;
-
 import ustc.siplexy.miniplane.models.PaperPlaneDetail;
-import ustc.siplexy.miniplane.ustc.siplexy.miniplane.httpclient.UIListenerInterface;
-import ustc.siplexy.miniplane.ustc.siplexy.miniplane.httpclient.VolleyService;
+import ustc.siplexy.miniplane.api.httpclient.UIListenerInterface;
+import ustc.siplexy.miniplane.api.httpclient.VolleyService;
 
 /**
+ * //ÒÑ·ÏÆú¡£
  * Created by siplexypeng on 2015/7/28.
  */
 public class PlaneApi {
@@ -39,7 +34,6 @@ public class PlaneApi {
     @TODO:¼ñ·É»ú
      */
     public static void pickPlane(UIListenerInterface uiListener){
-
 
     }
 
