@@ -13,11 +13,39 @@ package ustc.siplexy.miniplane.models;/**
  * @version: V1.0
  */
 public class PaperPlane {
-    public String storyid;
-    public String title;
-    public String total_favours;
-    public String state;
+    public static final String STORYID="id";
+    public static final String TOTAL_FAVOURS="total_favours";
+    public static final String TOTAL_COLLECTIONS="total_collections";
+    public static final String CREATE_TIME="create_time";
+
+
+    private String storyid;
+    private String title;
+    private String total_favours;
+    private String state;
+    private String create_time;
+    private String total_collections;
     public String lock_time;
+
+    public String getTotal_collections() {
+        return total_collections;
+    }
+
+    public void setTotal_collections(String total_collections) {
+        this.total_collections = total_collections;
+    }
+
+
+
+    public String getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
+    }
+
+
 
     public String getStoryid() {
         return storyid;

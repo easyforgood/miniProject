@@ -35,7 +35,7 @@ public class PickPaperPlaneDetailResponse implements JSONParseInterface<List<Pap
         list=new ArrayList<PaperPlaneDetail>();
 
         int dataLen=data.length();
-        for(int dataPos=0;dataPos<=dataLen;dataPos++){
+        for(int dataPos=0;dataPos<dataLen;dataPos++){
             PaperPlaneDetail item=new PaperPlaneDetail();
             JSONObject jsonItem=data.getJSONObject(dataPos);
             //Ìí¼ÓÊý¾Ý

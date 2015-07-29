@@ -26,6 +26,30 @@ import ustc.siplexy.miniplane.ustc.siplexy.miniplane.httpclient.VolleyService;
  */
 public class API {
     public static final String SUCCESS="success";
+    public static final String ZERO="0";
+
+    /**
+     * @TODO 获取热门飞机
+     *
+     * @param amount
+     * @param offset
+     * @param uiListener
+     * @param errorListener
+     */
+    public static void pickHotPlane(Integer amount,
+                                    Integer offset,
+                                    UIListenerInterface uiListener,
+                                    ErrorListener errorListener){
+        //start
+        String reqUrl="hot-planes";
+        HashMap<String,String> params= new HashMap<String,String>();
+        params.put("amount",amount == null? API.ZERO: amount.toString());
+        params.put("offset", offset == null ? API.ZERO : amount.toString());
+        Response.Listener<JSONObject> responseListener=
+                new JSONResponse(uiListener,new HotPlaneResponse());
+        VolleyService.requestJsonByGET(reqUrl,params,responseListener,null);
+
+    }
 
     /**
      * @TODO  获取文章段落 请求飞机段落
@@ -39,7 +63,7 @@ public class API {
                                        UIListenerInterface uiListenerInterface,
                                        ErrorListener errorListener){
         //start
-        String reqUrl="/plane/paragraphs";
+        String reqUrl="plane/paragraphs";
         Map<String,String> params=new HashMap<String, String>();
         if (amount==null){
             amount=0;
@@ -55,7 +79,7 @@ public class API {
     }
 
     /**
-     *
+     * @TODO  放飞飞机  发送段落
      * @param storyid
      * @param title
      * @param content
@@ -68,14 +92,14 @@ public class API {
                                       UIListenerInterface uiListener,
                                       ErrorListener errorListener){
         //start
-        String reqUrl="/fly-plane";
+        String reqUrl="fly-plane";
         Map<String,String> params=new HashMap<String, String>();
         if (storyid==null){
             return ;
         }
         params.put("story_id",storyid.toString());
-        params.put("title", title.toString());
-        params.put("content", content.toString());
+        params.put("title", title == null ? "" : title);
+        params.put("content", content==null? "" : content);
         Response.Listener<JSONObject> responseListener=
                 new JSONResponse(uiListener,new FlyPaperPlaneDetailResponse());
         VolleyService.requestJsonByPOST(reqUrl,params,responseListener,null);

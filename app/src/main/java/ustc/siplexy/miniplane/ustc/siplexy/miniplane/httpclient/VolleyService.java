@@ -27,7 +27,7 @@ import java.util.Map;
  */
 public class VolleyService {
 
-    private static final String URL="http://www.baidu.com/";
+    private static final String API_URL="http://104.236.124.234:8080/%s";
 
     private static RequestQueue mQueue=null;
 
@@ -41,42 +41,47 @@ public class VolleyService {
         if (isQueueEmpty()){
             return ;
         }
+
         StringRequest stringRequest=new StringRequest(Request.Method.GET,
                 requestUrl,responseListenr,errorListener);
         mQueue.add(stringRequest);
         return ;
     }
-    public static void requestJsonByGET(String requestUrl,
-                                        Map<String,String> params,
-                                        Response.Listener<JSONObject> responseListenr,
-                                        Response.ErrorListener errorListener){
+
+    private static void requestJson(int requestType,
+                                    String reqUrl,
+                                    Map<String,String> params,
+                                    Response.Listener<JSONObject> responseListenr,
+                                    Response.ErrorListener errorListener){
+        //start
         if (isQueueEmpty()){
             return ;
         }
         JSONObject jsonObject=new JSONObject(params);
-
+        String requestUrl=getAbsoluteApiUrl(reqUrl);
         JsonRequest<JSONObject> jsonRequest =
-                new JsonObjectRequest(Request.Method.GET,requestUrl,jsonObject,responseListenr,errorListener);
+                new JsonObjectRequest(requestType,requestUrl,jsonObject,responseListenr,errorListener);
 
         mQueue.add(jsonRequest);
         return ;
+
+    }
+    public static void requestJsonByGET(String reqUrl,
+                                        Map<String,String> params,
+                                        Response.Listener<JSONObject> responseListenr,
+                                        Response.ErrorListener errorListener){
+        requestJson(Request.Method.GET,reqUrl,params,responseListenr,errorListener);
+
     }
 
-    public static void requestJsonByPOST(String requestUrl,
+    public static void requestJsonByPOST(String reqUrl,
                                          Map<String,String> params,
                                          Response.Listener<JSONObject> responseListenr,
                                          Response.ErrorListener errorListener){
 
-        //mQueue
-        if (isQueueEmpty()){
-            return ;
-        }
-        JSONObject jsonObject=new JSONObject(params);
+        //start
+        requestJson(Request.Method.POST, reqUrl, params, responseListenr, errorListener);
 
-        JsonRequest<JSONObject> jsonRequest =
-                new JsonObjectRequest(Request.Method.POST,requestUrl,jsonObject,responseListenr,errorListener);
-
-        mQueue.add(jsonRequest);
     }
 
     private static boolean isQueueEmpty(){
@@ -108,5 +113,11 @@ public class VolleyService {
         ImageLoader.ImageListener listener = ImageLoader.getImageListener(view,
                 defaultImage, faultImage);
         imageLoader.get("http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg", listener);
+    }
+
+    public static String getAbsoluteApiUrl(String partUrl) {
+        String url = String.format(API_URL, partUrl);
+        Log.d("BASE_CLIENT", "request:" + url);
+        return url;
     }
 }

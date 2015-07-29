@@ -21,13 +21,15 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.List;
 
+import ustc.siplexy.miniplane.api.API;
 import ustc.siplexy.miniplane.api.PlaneApi;
+import ustc.siplexy.miniplane.models.PaperPlane;
 import ustc.siplexy.miniplane.models.PaperPlaneDetail;
 import ustc.siplexy.miniplane.ustc.siplexy.miniplane.httpclient.UIListenerInterface;
 import ustc.siplexy.miniplane.ustc.siplexy.miniplane.httpclient.VolleyService;
 
 
-public class MainActivity extends ActionBarActivity implements UIListenerInterface<String>, View.OnClickListener {
+public class MainActivity extends ActionBarActivity implements UIListenerInterface<List<PaperPlane>>, View.OnClickListener {
     private static final String URL = "http://www.baidu.com/";
 
     private TextView txtView;
@@ -66,19 +68,24 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onSuccess(String datas) {
 
-        txtView.setText(datas);
-    }
 
     @Override
     public void onClick(View v) {
-        PlaneApi.testApi(null, this);
+        API.pickHotPlane(0,0,this,null);
         ImageView imgView = (ImageView) findViewById(R.id.testImg);
         VolleyService.getImg("http://avatar.csdn.net/4/F/9/1_gaolu.jpg", imgView,
                 R.drawable.abc_textfield_default_mtrl_alpha,
                 R.drawable.abc_btn_check_to_on_mtrl_015);
 
+    }
+
+    @Override
+    public void onSuccess(List<PaperPlane> datas) {
+        StringBuffer s=new StringBuffer()
+                .append(datas.get(0).getTotal_favours())
+                .append(datas.get(1).getTotal_favours())
+                .append(datas.get(2).getTotal_favours());
+        txtView.setText(s.toString());
     }
 }

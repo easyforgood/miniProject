@@ -33,14 +33,13 @@ import ustc.siplexy.miniplane.ustc.siplexy.miniplane.httpclient.VolleyService;
  * Created by siplexypeng on 2015/7/28.
  */
 public class PlaneApi {
-     static final String reqPath="/";
+     static final String reqPath="http://104.236.124.234:8080/fly-plane";
 
     /*
     @TODO:¼ñ·É»ú
      */
     public static void pickPlane(UIListenerInterface uiListener){
-        VolleyService.requestJsonByGET(reqPath,
-                new PlaneApi().new PlaneApiResponse(uiListener),null);
+
 
     }
 
@@ -51,8 +50,7 @@ public class PlaneApi {
      */
     public static void pickPlaneDetail(Map<String,String> params,UIListenerInterface uiListener){
 
-        VolleyService.requestJsonByGET(reqPath,
-                new PlaneApi().new PlaneApiResponse(uiListener), null);
+
 
     }
 
