@@ -13,7 +13,7 @@ package ustc.siplexy.miniplane.models;/**
  * @version: V1.0
  */
 public class PaperPlane {
-    public static final String STORYID="id";
+    public static final String STORYID="_id";
     public static final String TOTAL_FAVOURS="total_favours";
     public static final String TOTAL_COLLECTIONS="total_collections";
     public static final String CREATE_TIME="create_time";

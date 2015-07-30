@@ -2,6 +2,8 @@ package ustc.siplexy.miniplane.api;/**
  * Created by Ïè on 2015/7/29.
  */
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,12 +25,15 @@ import ustc.siplexy.miniplane.models.PaperPlaneDetail;
  * @version: V1.0
  */
 public class HotPlaneResponse implements JSONParseInterface<List<PaperPlane>> {
+    public static String HOTPLANECACHENAME="hotplanecache";
 
 
 
     @Override
     public List<PaperPlane> parseJSONObject(JSONObject resultJson) throws JSONException {
-        JSONArray data=resultJson.getJSONArray("data");
+        String tempData=resultJson.getString("data");
+        JSONArray data=new JSONArray(tempData);
+        Log.d("TAG","json:--------"+resultJson.toString());
         List<PaperPlane> list=null;
         if (data==null){
             return null;
@@ -39,6 +44,7 @@ public class HotPlaneResponse implements JSONParseInterface<List<PaperPlane>> {
         int dataLen=data.length();
         for(int dataPos=0;dataPos<dataLen;dataPos++){
             PaperPlane item=new PaperPlane();
+
             JSONObject jsonItem=data.getJSONObject(dataPos);
             //Ìí¼ÓÊý¾Ý
             item.setStoryid(jsonItem.getString(PaperPlane.STORYID));

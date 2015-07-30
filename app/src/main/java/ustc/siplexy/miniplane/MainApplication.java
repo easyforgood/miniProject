@@ -5,6 +5,7 @@ package ustc.siplexy.miniplane;/**
 import android.app.Application;
 
 import ustc.siplexy.miniplane.api.httpclient.VolleyService;
+import ustc.siplexy.miniplane.cache.ACache;
 
 /**
  * Created with Android Studio.
@@ -18,6 +19,7 @@ import ustc.siplexy.miniplane.api.httpclient.VolleyService;
  */
 public class MainApplication extends Application {
     private static MainApplication instance;
+    private static ACache cache;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -27,5 +29,12 @@ public class MainApplication extends Application {
 
     private void init(){
         VolleyService.initVolley(this);
+        cache=ACache.get(this);
+    }
+    public static MainApplication getInstance(){
+        return instance;
+    }
+    public static ACache getACache(){
+        return cache;
     }
 }

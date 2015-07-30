@@ -24,12 +24,14 @@ import ustc.siplexy.miniplane.api.httpclient.UIListenerInterface;
  * @date:
  * @version: V1.0
  */
-public class JSONResponse implements Response.Listener<JSONObject>,Response.ErrorListener{
+public class JSONHandler implements Response.Listener<JSONObject>,Response.ErrorListener{
     private UIListenerInterface uiListener=null;
     private JSONParseInterface parseJson=null;
 
-    public JSONResponse(UIListenerInterface uiListener,
-                             JSONParseInterface parseJson){
+
+
+    public JSONHandler(UIListenerInterface uiListener,
+                       JSONParseInterface parseJson){
         this.uiListener=uiListener;
         this.parseJson=parseJson;
 
@@ -50,8 +52,9 @@ public class JSONResponse implements Response.Listener<JSONObject>,Response.Erro
 
     @Override
     public void onErrorResponse(VolleyError error) {
-
-        uiListener.onError(error);
+        if(uiListener!=null){
+            uiListener.onError(error);
+        }
         Log.e("TAG", error.getMessage(), error);
     }
 }

@@ -16,7 +16,7 @@ import org.json.JSONObject;
  * @date:
  * @version: V1.0
  */
-public class FlyPaperPlaneDetailResponse implements JSONParseInterface<String> {
+public class StringParse implements JSONParseInterface<String> {
 
     @Override
     public String parseJSONObject(JSONObject resultJson) throws JSONException {
