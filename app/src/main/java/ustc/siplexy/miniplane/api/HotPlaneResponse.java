@@ -32,12 +32,27 @@ public class HotPlaneResponse implements JSONParseInterface<List<PaperPlane>> {
     @Override
     public List<PaperPlane> parseJSONObject(JSONObject resultJson) throws JSONException {
         String tempData=resultJson.getString("data");
-        JSONArray data=new JSONArray(tempData);
-        Log.d("TAG","json:--------"+resultJson.toString());
         List<PaperPlane> list=null;
-        if (data==null){
+        if (tempData==null){
             return null;
         }
+        if (tempData.startsWith("{")){
+            list=new ArrayList<PaperPlane>();
+            JSONObject jsonItem=new JSONObject(tempData);
+            PaperPlane item=new PaperPlane();
+
+            //Ìí¼ÓÊý¾Ý
+            item.setStoryid(jsonItem.getString(PaperPlane.STORYID));
+            item.setCreate_time(jsonItem.getString(PaperPlane.CREATE_TIME));
+            item.setTotal_favours(jsonItem.getString(PaperPlane.TOTAL_FAVOURS));
+            item.setTotal_collections(jsonItem.getString(PaperPlane.TOTAL_COLLECTIONS));
+            list.add(item);
+            return list;
+        }
+        JSONArray data=new JSONArray(tempData);
+        Log.d("TAG","json:--------"+resultJson.toString());
+
+
 
         list=new ArrayList<PaperPlane>();
 

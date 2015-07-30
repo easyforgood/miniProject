@@ -80,13 +80,16 @@ public class API {
 
 
     /**
-     * @TODO 获取飞机 get
+     * @TODO 捡飞机 POST
      * @param uiListener
      */
     public static void pickPlane(UIListenerInterface<List<PaperPlane>> uiListener){
         String reqUrl="plane/occupy";
+        HashMap<String,String> params=new HashMap<>();
+        params.put("story_id","");
         JSONHandler jsonHandler =new JSONHandler(uiListener,new HotPlaneResponse());
-        VolleyService.requestJsonByGET(reqUrl, null, jsonHandler, jsonHandler);
+
+        VolleyService.requestJsonByPOST(reqUrl,params , jsonHandler, jsonHandler);
     }
     /**
      * @TODO 获取热门飞机 GET
@@ -113,12 +116,12 @@ public class API {
     /**
      * @TODO  获取文章段落 请求飞机段落  GET
      * @param story_id 所在故事id
-     * @param amount 请求数量
-     * @param offset 偏移量
+     * @param amount 每页数量
+     * @param offset 页数
      * @param uiListenerInterface List<PaperPlaneDetail>
      *
      */
-    public static void pickPlaneDetail(Integer story_id,
+    public static void pickPlaneDetail(String story_id,
                                        Integer amount,
                                        Integer offset,
                                        UIListenerInterface<List<PaperPlaneDetail>> uiListenerInterface){
@@ -131,12 +134,10 @@ public class API {
         if (offset == null){
             offset=0;
         }
-        if (null==story_id){
-            story_id=0;
-        }
+
         if (story_id.equals(0))
             return;
-        reqUrl=String.format(reqUrl, story_id.toString(), amount.toString(), offset.toString());
+        reqUrl=String.format(reqUrl, story_id==null?"":story_id, amount.toString(), offset.toString());
         Response.Listener<JSONObject> responseListener=
                 new JSONHandler(uiListenerInterface,new PickPaperPlaneDetailResponse());
         VolleyService.requestJsonByGET(reqUrl, null, responseListener, null);
@@ -160,6 +161,11 @@ public class API {
 
     /**
      * @TODO  放飞飞机  发送段落 POST
+     * @info  这里全部参数都不能用null 为空用""表示！！
+     * storyid 为空时，就是叠飞机的操作
+     * storyid 不为空是，就是续航的操作
+     *
+     *
      * @param storyid 所在飞机的id
      * @param title 标题
      * @param content 文章内容内容
@@ -169,13 +175,13 @@ public class API {
     public static void flyPlane(String storyid,
                                       String title,
                                       String content,
-                                      UIListenerInterface uiListener){
+                                      UIListenerInterface<String> uiListener){
         //start
         String reqUrl="plane/fly";
         Map<String,String> params=new HashMap<String, String>();
 
         params.put("story_id",storyid==null?"":storyid);
-        params.put("title", title == null ? "" : title);
+        params.put("title", title == null? "" : title);
         params.put("content", content==null? "" : content);
         JSONHandler jsonHandler=
                 new JSONHandler(uiListener,new StringParse());

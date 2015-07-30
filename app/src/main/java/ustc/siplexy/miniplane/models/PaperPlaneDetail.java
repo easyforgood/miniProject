@@ -8,7 +8,7 @@ public class PaperPlaneDetail {
      * @TODO:字段常量,后台接口json格式中涉及到的常量
      *
      */
-    public static final String PARAGRAPH_ID="id"; //段落id 也就是每一个纸飞机
+    public static final String PARAGRAPH_ID="_id"; //段落id 也就是每一个纸飞机
     public static final String AUTHOR="author"; //作者
     public static final String AUTHOR_NICKNAME="nickname"; //作者昵称
     public static final String FAVOR_COUNT="favour_users"; // 点赞数

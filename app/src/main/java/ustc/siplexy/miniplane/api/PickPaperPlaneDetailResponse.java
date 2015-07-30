@@ -37,15 +37,17 @@ public class PickPaperPlaneDetailResponse implements JSONParseInterface<List<Pap
         int dataLen=data.length();
         for(int dataPos=0;dataPos<dataLen;dataPos++){
             PaperPlaneDetail item=new PaperPlaneDetail();
-            JSONObject jsonItem=data.getJSONObject(dataPos);
+            String tempData=data.getString(dataPos);
+            JSONObject jsonItem=new JSONObject(tempData);
             //Ìí¼ÓÊý¾Ý
             item.setParagraph_id(jsonItem.getString(PaperPlaneDetail.PARAGRAPH_ID));
-            item.setFavor_count(jsonItem.getJSONArray(PaperPlaneDetail.FAVOR_COUNT).length());
+            item.setFavor_count(jsonItem.getInt(PaperPlaneDetail.FAVOR_COUNT));
             item.setAuthor_nickname(jsonItem.getJSONObject(PaperPlaneDetail.AUTHOR).
                     getString(PaperPlaneDetail.AUTHOR_NICKNAME));
             item.setAuthor_picurl(jsonItem.getJSONObject(PaperPlaneDetail.AUTHOR).
                     getString(PaperPlaneDetail.AUTHOR_PICURL));
             item.setContent(jsonItem.getString(PaperPlaneDetail.CONTENT));
+            list.add(item);
         }
         return list;
     }

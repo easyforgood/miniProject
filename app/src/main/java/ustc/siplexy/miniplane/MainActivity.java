@@ -30,17 +30,20 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.util.List;
+
 import com.tencent.connect.common.Constants;
 
 import ustc.siplexy.miniplane.api.API;
+import ustc.siplexy.miniplane.cache.ACache;
 import ustc.siplexy.miniplane.models.PaperPlane;
 import ustc.siplexy.miniplane.api.httpclient.UIListenerInterface;
 import ustc.siplexy.miniplane.api.httpclient.VolleyService;
+import ustc.siplexy.miniplane.models.PaperPlaneDetail;
 
 
-public class MainActivity extends ActionBarActivity implements UIListenerInterface<List<PaperPlane>>, View.OnClickListener,IUiListener,IRequestListener {
+public class MainActivity extends ActionBarActivity implements UIListenerInterface<List<PaperPlaneDetail>>, View.OnClickListener, IUiListener, IRequestListener {
     private static final String URL = "http://www.baidu.com/";
-    private final String cacheName="test";
+    private final String cacheName = "test";
 
 
     private TextView txtView;
@@ -52,12 +55,12 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         Button testBtn = (Button) this.findViewById(R.id.testBtn);
 
         txtView = (TextView) findViewById(R.id.testTxt);
-        String cacheValue=MainApplication.getACache().getAsString(cacheName);
-        txtView.setText(cacheValue==null?"Hello Sip" : cacheValue);
+        String cacheValue = MainApplication.getACache().getAsString(cacheName);
+        txtView.setText(cacheValue == null ? "Hello Sip" : cacheValue);
 
 
         testBtn.setOnClickListener(this);
@@ -86,32 +89,40 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
     }
 
 
-
     @Override
     public void onClick(View v) {
+
 
         API.loginByPhone("18051114512", "test", new UIListenerInterface<String>() {
             @Override
             public void onSuccess(String datas) {
-                Toast.makeText(MainApplication.getInstance(),"Success",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainApplication.getInstance(), "Login Success", Toast.LENGTH_LONG).show();
+                Log.e("TAG", "login success");
             }
 
             @Override
             public void onError(VolleyError error) {
-
+                Toast.makeText(MainApplication.getInstance(), "Login erro", Toast.LENGTH_LONG).show();
+                Log.e("TAG", "login error");
             }
         });
-        API.pickHotPlane(1,0,this);
-        Tencent mTencent= Tencent.createInstance("1104715967", this.getApplicationContext());
-        if (!mTencent.isSessionValid())
-        {
-            //mTencent.login(this, "all", this);
+
+        API.pickPlaneDetail("55ba28d801766f090352bd24", 1, 1, this);
+
+        API.pickPlaneDetail("55ba28d801766f090352bd24",3,1,this);
 
 
+        //API.pickHotPlane(1,1,this);
 
-        }else{
-            //UserInfo mInfo=new UserInfo(this,mTencent.getQQToken());
-            //mInfo.getUserInfo(this);
+        Tencent mTencent = Tencent.createInstance("1104715967", this.getApplicationContext());
+        if (!mTencent.isSessionValid()) {
+            mTencent.login(this, "all", this);
+
+
+        } else {
+            mTencent.getAccessToken();
+            UserInfo mInfo=new UserInfo(this,mTencent.getQQToken());
+            mInfo.getUserInfo(this);
         }
         ImageView imgView = (ImageView) findViewById(R.id.testImg);
         API.getImg("http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg", imgView,
@@ -122,8 +133,9 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
     }
 
 
+/*
 
-    /*@Override
+    @Override
     public void onSuccess(String datas) {
         if (datas ==null){
             Log.e("TAG","SORYY EMPTY");
@@ -134,26 +146,43 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
         MainApplication.getACache().put(cacheName,datas);
         Toast.makeText(this,"success",Toast.LENGTH_SHORT).show();
         return ;
-    }*/
+    }
+*/
 
 
-
-
+ /*
 
     @Override
     public void onSuccess(List<PaperPlane> datas) {
-        txtView.setText(datas==null?"EMpty":datas.get(0).toString());
+        Log.e("TAG", "pickHot now");
+        if (datas !=null) {
+            MainApplication.getACache().put(cacheName, datas.get(0).getStoryid().toString());
+        }
+        txtView.setText(datas == null ? "EMpty" : datas.get(0).getTotal_collections().toString());
+    }*/
+
+    @Override
+    public void onSuccess(List<PaperPlaneDetail> datas) {
+        if (datas!=null){
+            for (PaperPlaneDetail item: datas){
+                String temp=txtView.getText().toString();
+                txtView.setText(temp+"\n"+"para id :"+
+                        item.getParagraph_id()+"content:"+item.getContent());
+            }
+
+        }
+
     }
 
     @Override
     public void onError(VolleyError error) {
-        Toast.makeText(this,"wrong",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "wrong", Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
     public void onComplete(Object o) {
-        Toast.makeText(this,o==null?"null":o.toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, o == null ? "null" : o.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -168,7 +197,7 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
 
     @Override
     public void onComplete(JSONObject jsonObject) {
-        Toast.makeText(this,jsonObject==null?"null":jsonObject.toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, jsonObject == null ? "null" : jsonObject.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
