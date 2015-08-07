@@ -1,5 +1,5 @@
 package ustc.siplexy.miniplane.api;/**
- * Created by Ïè on 2015/7/29.
+ * Created by ç¿” on 2015/7/29.
  */
 
 import android.util.Log;
@@ -19,7 +19,7 @@ import ustc.siplexy.miniplane.api.httpclient.UIListenerInterface;
  *
  * @Project:
  * @Package:
- * @Description: Í¨ÓÃ½âÎö
+ * @Description: é€šç”¨è§£æ
  * @author:
  * @date:
  * @version: V1.0
@@ -41,7 +41,7 @@ public class JSONHandler implements Response.Listener<JSONObject>,Response.Error
     public void onResponse(JSONObject jsonObject) {
         if (uiListener!=null && parseJson!=null){
             try {
-                //½âÎöÊı¾İ£¬»ØµôUI²Ù×÷½Ó¿Ú
+                //è§£ææ•°æ®ï¼Œå›æ‰UIæ“ä½œæ¥å£
                 uiListener.onSuccess(parseJson.parseJSONObject(jsonObject));
             } catch (JSONException e) {
                 Log.e("Api", "json parse wrong");

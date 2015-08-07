@@ -92,7 +92,17 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
     @Override
     public void onClick(View v) {
 
+      /*  Tencent mTencent = Tencent.createInstance("1104715967", this.getApplicationContext());
+        if (!mTencent.isSessionValid()) {
+            mTencent.login(this, "all", this);
 
+
+        } else {
+            mTencent.getAccessToken();
+            UserInfo mInfo=new UserInfo(this,mTencent.getQQToken());
+            mInfo.getUserInfo(this);
+        }
+*/
         API.loginByPhone("18051114512", "test", new UIListenerInterface<String>() {
             @Override
             public void onSuccess(String datas) {
@@ -106,10 +116,11 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
                 Log.e("TAG", "login error");
             }
         });
+        //API.flyPlane(null,"这是一个中文测试","内容为空",this);
 
-        API.pickPlaneDetail("55ba28d801766f090352bd24", 1, 1, this);
+        /*API.pickPlaneDetail("55ba28d801766f090352bd24", 1, 1, this);*/
 
-        API.pickPlaneDetail("55ba28d801766f090352bd24",3,1,this);
+        API.pickPlaneDetail("55ba59bc01766f2c5882daa6",3,1,this);
 
 
         //API.pickHotPlane(1,1,this);
@@ -123,6 +134,7 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
             mTencent.getAccessToken();
             UserInfo mInfo=new UserInfo(this,mTencent.getQQToken());
             mInfo.getUserInfo(this);
+
         }
         ImageView imgView = (ImageView) findViewById(R.id.testImg);
         API.getImg("http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg", imgView,
@@ -174,6 +186,11 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
 
     }
 
+  /*  @Override
+    public void onSuccess(String datas) {
+        Toast.makeText(this,datas==null?"failed":datas,Toast.LENGTH_SHORT).show();
+    }*/
+
     @Override
     public void onError(VolleyError error) {
         Toast.makeText(this, "wrong", Toast.LENGTH_SHORT).show();
@@ -182,7 +199,8 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
 
     @Override
     public void onComplete(Object o) {
-        Toast.makeText(this, o == null ? "null" : o.toString(), Toast.LENGTH_SHORT).show();
+        txtView.setText(o.toString());
+
     }
 
     @Override
@@ -197,7 +215,7 @@ public class MainActivity extends ActionBarActivity implements UIListenerInterfa
 
     @Override
     public void onComplete(JSONObject jsonObject) {
-        Toast.makeText(this, jsonObject == null ? "null" : jsonObject.toString(), Toast.LENGTH_SHORT).show();
+        txtView.setText(jsonObject.toString());
     }
 
     @Override

@@ -1,5 +1,5 @@
 package ustc.siplexy.miniplane.api;/**
- * Created by Ïè on 2015/7/28.
+ * Created by ç¿” on 2015/7/28.
  */
 
 import org.json.JSONArray;
@@ -16,7 +16,7 @@ import ustc.siplexy.miniplane.models.PaperPlaneDetail;
  *
  * @Project:
  * @Package:
- * @Description: ¼ñ·É»ú¶ÎÂäµÄÒµÎñÊµÏÖ
+ * @Description: æ¡é£æœºæ®µè½çš„ä¸šåŠ¡å®ç°
  * @author:
  * @date:
  * @version: V1.0
@@ -39,7 +39,7 @@ public class PickPaperPlaneDetailResponse implements JSONParseInterface<List<Pap
             PaperPlaneDetail item=new PaperPlaneDetail();
             String tempData=data.getString(dataPos);
             JSONObject jsonItem=new JSONObject(tempData);
-            //Ìí¼ÓÊı¾İ
+            //æ·»åŠ æ•°æ®
             item.setParagraph_id(jsonItem.getString(PaperPlaneDetail.PARAGRAPH_ID));
             item.setFavor_count(jsonItem.getInt(PaperPlaneDetail.FAVOR_COUNT));
             item.setAuthor_nickname(jsonItem.getJSONObject(PaperPlaneDetail.AUTHOR).

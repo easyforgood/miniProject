@@ -1,5 +1,5 @@
 package ustc.siplexy.miniplane.api;/**
- * Created by Ïè on 2015/7/29.
+ * Created by ç¿” on 2015/7/29.
  */
 
 import android.util.Log;
@@ -16,7 +16,7 @@ import ustc.siplexy.miniplane.models.PaperPlaneDetail;
 
 /**
  * Created with Android Studio.
- * @TODO ÈÈÃÅ·É»úµÄÊıÁ¿
+ * @TODO çƒ­é—¨é£æœºçš„æ•°é‡
  * @Project:
  * @Package:
  * @Description:
@@ -41,7 +41,7 @@ public class HotPlaneResponse implements JSONParseInterface<List<PaperPlane>> {
             JSONObject jsonItem=new JSONObject(tempData);
             PaperPlane item=new PaperPlane();
 
-            //Ìí¼ÓÊı¾İ
+            //æ·»åŠ æ•°æ®
             item.setStoryid(jsonItem.getString(PaperPlane.STORYID));
             item.setCreate_time(jsonItem.getString(PaperPlane.CREATE_TIME));
             item.setTotal_favours(jsonItem.getString(PaperPlane.TOTAL_FAVOURS));
@@ -61,7 +61,7 @@ public class HotPlaneResponse implements JSONParseInterface<List<PaperPlane>> {
             PaperPlane item=new PaperPlane();
 
             JSONObject jsonItem=data.getJSONObject(dataPos);
-            //Ìí¼ÓÊı¾İ
+            //æ·»åŠ æ•°æ®
             item.setStoryid(jsonItem.getString(PaperPlane.STORYID));
             item.setCreate_time(jsonItem.getString(PaperPlane.CREATE_TIME));
             item.setTotal_favours(jsonItem.getString(PaperPlane.TOTAL_FAVOURS));

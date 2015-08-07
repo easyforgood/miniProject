@@ -2,7 +2,7 @@
  *
  * test
  *
- * ÎŞÓÃÁË
+ * æ— ç”¨äº†
  */
 
 package ustc.siplexy.miniplane.api;
@@ -24,14 +24,14 @@ import ustc.siplexy.miniplane.api.httpclient.UIListenerInterface;
 import ustc.siplexy.miniplane.api.httpclient.VolleyService;
 
 /**
- * //ÒÑ·ÏÆú¡£
+ * //å·²åºŸå¼ƒã€‚
  * Created by siplexypeng on 2015/7/28.
  */
 public class PlaneApi {
      static final String reqPath="http://104.236.124.234:8080/fly-plane";
 
     /*
-    @TODO:¼ñ·É»ú
+    @TODO:æ¡é£æœº
      */
     public static void pickPlane(UIListenerInterface uiListener){
 
@@ -40,7 +40,7 @@ public class PlaneApi {
 
 
     /*
-    @TODO:¼ñ·É»ú²Ù×÷ ²é¿´¶ÎÂä
+    @TODO:æ¡é£æœºæ“ä½œ æŸ¥çœ‹æ®µè½
      */
     public static void pickPlaneDetail(Map<String,String> params,UIListenerInterface uiListener){
 
@@ -62,7 +62,7 @@ public class PlaneApi {
 
 
     /*
-        @TODO:ÓÃÀ´½âÎöjsonÊı¾İ paperplaneDetail
+        @TODO:ç”¨æ¥è§£æjsonæ•°æ® paperplaneDetail
      */
     public static List<PaperPlaneDetail> parsePaperPlaneDetail(JSONObject resultJson) throws JSONException {
         JSONArray data=resultJson.getJSONArray("data");
@@ -77,7 +77,7 @@ public class PlaneApi {
         for(int dataPos=0;dataPos<=dataLen;dataPos++){
             PaperPlaneDetail item=new PaperPlaneDetail();
             JSONObject jsonItem=data.getJSONObject(dataPos);
-            //Ìí¼ÓÊı¾İ
+            //æ·»åŠ æ•°æ®
             item.setParagraph_id(jsonItem.getString(PaperPlaneDetail.PARAGRAPH_ID));
             item.setFavor_count(jsonItem.getJSONArray(PaperPlaneDetail.FAVOR_COUNT).length());
             item.setAuthor_nickname(jsonItem.getJSONObject(PaperPlaneDetail.AUTHOR).
@@ -91,7 +91,7 @@ public class PlaneApi {
     }
 
     /*
-        @TODO: ÇëÇóºó»áµ÷½Ó¿ÚÊµÏÖ
+        @TODO: è¯·æ±‚åä¼šè°ƒæ¥å£å®ç°
      */
     private class PlaneApiResponse implements Response.Listener<JSONObject>{
         UIListenerInterface<List<PaperPlaneDetail>> uiListener=null;

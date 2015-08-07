@@ -5,8 +5,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * @ JSON ½âÎöÊ¹ÓÃµÄ½Ó¿Ú
- * Created by Ïè on 2015/7/29.
+ * @ JSON è§£æä½¿ç”¨çš„æ¥å£
+ * Created by ç¿” on 2015/7/29.
  */
 public interface JSONParseInterface<T>{
     public T parseJSONObject(JSONObject resultJson) throws JSONException;

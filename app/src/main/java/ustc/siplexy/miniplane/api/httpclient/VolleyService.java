@@ -22,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Ïè on 2015/7/27.
+ * Created by ç¿” on 2015/7/27.
  */
 public class VolleyService {
 
@@ -100,7 +101,7 @@ public class VolleyService {
     }
 
     /**
-     * @TODO »ñÈ¡request¶ÔÏó ÕâÀïÖØĞ´ÁËJsonRequest ÎªÁË»ñÈ¡cookies
+     * @TODO è·å–requestå¯¹è±¡ è¿™é‡Œé‡å†™äº†JsonRequest ä¸ºäº†è·å–cookies
      * @param requestType
      * @param reqUrl
      * @param params
@@ -120,6 +121,18 @@ public class VolleyService {
             @Override
             protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
                 String cookies=response.headers.get("Set-Cookie");
+                try {
+                    String type = response.headers.get(HTTP.CONTENT_TYPE);
+                    if (type == null) {
+                        type = "charset=UTF-8";
+                        response.headers.put(HTTP.CONTENT_TYPE, type);
+                    } else if (!type.contains("UTF-8")) {
+                        type += ";" + "charset=UTF-8";
+                        response.headers.put(HTTP.CONTENT_TYPE, type);
+                    }
+                } catch (Exception e) {
+                    // print stacktrace e.g.
+                }
                 if(cookies != null) {
                     VolleyService.cookies = cookies;
                 }
@@ -148,6 +161,7 @@ public class VolleyService {
                 if(VolleyService.cookies!=null) {
                     mHeaders.put("Cookie", VolleyService.cookies);
                 }
+                mHeaders.put("Content-Type","application/json; charset=utf-8");
 
                 return mHeaders;
             }
@@ -167,7 +181,7 @@ public class VolleyService {
     }
 
     /*
-       @TODO: »ñÈ¡Í¼Æ¬
+       @TODO: è·å–å›¾ç‰‡
     */
     public static void getImg(String reqUrl,ImageView view,int defaultImage,int faultImage){
         String responseURL=getAbsoluteApiUrl(reqUrl);

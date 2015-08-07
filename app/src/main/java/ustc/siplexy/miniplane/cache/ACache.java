@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012-2013, Michael Yang 杨福�? (www.yangfuhai.com).
+ * Copyright (c) 2012-2013, Michael Yang 鏉ㄧ娴? (www.yangfuhai.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,13 +47,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 /**
- * @author Michael Yang（www.yangfuhai.com�? update at 2013.08.07
+ * @author Michael Yang锛坵ww.yangfuhai.com锛? update at 2013.08.07
  */
 public class ACache {
 	public static final int TIME_HOUR = 60 * 60;
 	public static final int TIME_DAY = TIME_HOUR * 24;
 	private static final int MAX_SIZE = 1000 * 1000 * 50; // 50 mb
-	private static final int MAX_COUNT = Integer.MAX_VALUE; // 不限制存放数据的数量
+	private static final int MAX_COUNT = Integer.MAX_VALUE; // 涓嶉檺鍒跺瓨鏀炬暟鎹殑鏁伴噺
 	private static Map<String, ACache> mInstanceMap = new HashMap<String, ACache>();
 	private ACacheManager mCache;
 
@@ -97,15 +97,15 @@ public class ACache {
 	}
 
 	// =======================================
-	// ============ String数据 读写 ==============
+	// ============ String鏁版嵁 璇诲啓 ==============
 	// =======================================
 	/**
-	 * 保存 String数据 �? 缓存�?
+	 * 淇濆瓨 String鏁版嵁 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的String数据
+	 *            淇濆瓨鐨凷tring鏁版嵁
 	 */
 	public void put(String key, String value) {
 		File file = mCache.newFile(key);
@@ -129,24 +129,24 @@ public class ACache {
 	}
 
 	/**
-	 * 保存 String数据 �? 缓存�?
+	 * 淇濆瓨 String鏁版嵁 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的String数据
+	 *            淇濆瓨鐨凷tring鏁版嵁
 	 * @param saveTime
-	 *            保存的时间，单位：秒
+	 *            淇濆瓨鐨勬椂闂达紝鍗曚綅锛氱
 	 */
 	public void put(String key, String value, int saveTime) {
 		put(key, Utils.newStringWithDateInfo(saveTime, value));
 	}
 
 	/**
-	 * 读取 String数据
+	 * 璇诲彇 String鏁版嵁
 	 * 
 	 * @param key
-	 * @return String 数据
+	 * @return String 鏁版嵁
 	 */
 	public String getAsString(String key) {
 		File file = mCache.get(key);
@@ -184,39 +184,39 @@ public class ACache {
 	}
 
 	// =======================================
-	// ============= JSONObject 数据 读写 ==============
+	// ============= JSONObject 鏁版嵁 璇诲啓 ==============
 	// =======================================
 	/**
-	 * 保存 JSONObject数据 �? 缓存�?
+	 * 淇濆瓨 JSONObject鏁版嵁 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的JSON数据
+	 *            淇濆瓨鐨凧SON鏁版嵁
 	 */
 	public void put(String key, JSONObject value) {
 		put(key, value.toString());
 	}
 
 	/**
-	 * 保存 JSONObject数据 �? 缓存�?
+	 * 淇濆瓨 JSONObject鏁版嵁 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的JSONObject数据
+	 *            淇濆瓨鐨凧SONObject鏁版嵁
 	 * @param saveTime
-	 *            保存的时间，单位：秒
+	 *            淇濆瓨鐨勬椂闂达紝鍗曚綅锛氱
 	 */
 	public void put(String key, JSONObject value, int saveTime) {
 		put(key, value.toString(), saveTime);
 	}
 
 	/**
-	 * 读取JSONObject数据
+	 * 璇诲彇JSONObject鏁版嵁
 	 * 
 	 * @param key
-	 * @return JSONObject数据
+	 * @return JSONObject鏁版嵁
 	 */
 	public JSONObject getAsJSONObject(String key) {
 		String JSONString = getAsString(key);
@@ -230,39 +230,39 @@ public class ACache {
 	}
 
 	// =======================================
-	// ============ JSONArray 数据 读写 =============
+	// ============ JSONArray 鏁版嵁 璇诲啓 =============
 	// =======================================
 	/**
-	 * 保存 JSONArray数据 �? 缓存�?
+	 * 淇濆瓨 JSONArray鏁版嵁 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的JSONArray数据
+	 *            淇濆瓨鐨凧SONArray鏁版嵁
 	 */
 	public void put(String key, JSONArray value) {
 		put(key, value.toString());
 	}
 
 	/**
-	 * 保存 JSONArray数据 �? 缓存�?
+	 * 淇濆瓨 JSONArray鏁版嵁 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的JSONArray数据
+	 *            淇濆瓨鐨凧SONArray鏁版嵁
 	 * @param saveTime
-	 *            保存的时间，单位：秒
+	 *            淇濆瓨鐨勬椂闂达紝鍗曚綅锛氱
 	 */
 	public void put(String key, JSONArray value, int saveTime) {
 		put(key, value.toString(), saveTime);
 	}
 
 	/**
-	 * 读取JSONArray数据
+	 * 璇诲彇JSONArray鏁版嵁
 	 * 
 	 * @param key
-	 * @return JSONArray数据
+	 * @return JSONArray鏁版嵁
 	 */
 	public JSONArray getAsJSONArray(String key) {
 		String JSONString = getAsString(key);
@@ -276,15 +276,15 @@ public class ACache {
 	}
 
 	// =======================================
-	// ============== byte 数据 读写 =============
+	// ============== byte 鏁版嵁 璇诲啓 =============
 	// =======================================
 	/**
-	 * 保存 byte数据 �? 缓存�?
+	 * 淇濆瓨 byte鏁版嵁 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的数�?
+	 *            淇濆瓨鐨勬暟鎹?
 	 */
 	public void put(String key, byte[] value) {
 		File file = mCache.newFile(key);
@@ -308,24 +308,24 @@ public class ACache {
 	}
 
 	/**
-	 * 保存 byte数据 �? 缓存�?
+	 * 淇濆瓨 byte鏁版嵁 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的数�?
+	 *            淇濆瓨鐨勬暟鎹?
 	 * @param saveTime
-	 *            保存的时间，单位：秒
+	 *            淇濆瓨鐨勬椂闂达紝鍗曚綅锛氱
 	 */
 	public void put(String key, byte[] value, int saveTime) {
 		put(key, Utils.newByteArrayWithDateInfo(saveTime, value));
 	}
 
 	/**
-	 * 获取 byte 数据
+	 * 鑾峰彇 byte 鏁版嵁
 	 * 
 	 * @param key
-	 * @return byte 数据
+	 * @return byte 鏁版嵁
 	 */
 	public byte[] getAsBinary(String key) {
 		RandomAccessFile RAFile = null;
@@ -360,29 +360,29 @@ public class ACache {
 	}
 
 	// =======================================
-	// ============= 序列�? 数据 读写 ===============
+	// ============= 搴忓垪鍖? 鏁版嵁 璇诲啓 ===============
 	// =======================================
 	/**
-	 * 保存 Serializable数据 �? 缓存�?
+	 * 淇濆瓨 Serializable鏁版嵁 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的value
+	 *            淇濆瓨鐨剉alue
 	 */
 	public void put(String key, Serializable value) {
 		put(key, value, -1);
 	}
 
 	/**
-	 * 保存 Serializable数据�? 缓存�?
+	 * 淇濆瓨 Serializable鏁版嵁鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的value
+	 *            淇濆瓨鐨剉alue
 	 * @param saveTime
-	 *            保存的时间，单位：秒
+	 *            淇濆瓨鐨勬椂闂达紝鍗曚綅锛氱
 	 */
 	public void put(String key, Serializable value, int saveTime) {
 		ByteArrayOutputStream baos = null;
@@ -408,10 +408,10 @@ public class ACache {
 	}
 
 	/**
-	 * 读取 Serializable数据
+	 * 璇诲彇 Serializable鏁版嵁
 	 * 
 	 * @param key
-	 * @return Serializable 数据
+	 * @return Serializable 鏁版嵁
 	 */
 	public Object getAsObject(String key) {
 		byte[] data = getAsBinary(key);
@@ -446,39 +446,39 @@ public class ACache {
 	}
 
 	// =======================================
-	// ============== bitmap 数据 读写 =============
+	// ============== bitmap 鏁版嵁 璇诲啓 =============
 	// =======================================
 	/**
-	 * 保存 bitmap �? 缓存�?
+	 * 淇濆瓨 bitmap 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的bitmap数据
+	 *            淇濆瓨鐨刡itmap鏁版嵁
 	 */
 	public void put(String key, Bitmap value) {
 		put(key, Utils.Bitmap2Bytes(value));
 	}
 
 	/**
-	 * 保存 bitmap �? 缓存�?
+	 * 淇濆瓨 bitmap 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存�? bitmap 数据
+	 *            淇濆瓨鐨? bitmap 鏁版嵁
 	 * @param saveTime
-	 *            保存的时间，单位：秒
+	 *            淇濆瓨鐨勬椂闂达紝鍗曚綅锛氱
 	 */
 	public void put(String key, Bitmap value, int saveTime) {
 		put(key, Utils.Bitmap2Bytes(value), saveTime);
 	}
 
 	/**
-	 * 读取 bitmap 数据
+	 * 璇诲彇 bitmap 鏁版嵁
 	 * 
 	 * @param key
-	 * @return bitmap 数据
+	 * @return bitmap 鏁版嵁
 	 */
 	public Bitmap getAsBitmap(String key) {
 		if (getAsBinary(key) == null) {
@@ -488,39 +488,39 @@ public class ACache {
 	}
 
 	// =======================================
-	// ============= drawable 数据 读写 =============
+	// ============= drawable 鏁版嵁 璇诲啓 =============
 	// =======================================
 	/**
-	 * 保存 drawable �? 缓存�?
+	 * 淇濆瓨 drawable 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存的drawable数据
+	 *            淇濆瓨鐨刣rawable鏁版嵁
 	 */
 	public void put(String key, Drawable value) {
 		put(key, Utils.drawable2Bitmap(value));
 	}
 
 	/**
-	 * 保存 drawable �? 缓存�?
+	 * 淇濆瓨 drawable 鍒? 缂撳瓨涓?
 	 * 
 	 * @param key
-	 *            保存的key
+	 *            淇濆瓨鐨刱ey
 	 * @param value
-	 *            保存�? drawable 数据
+	 *            淇濆瓨鐨? drawable 鏁版嵁
 	 * @param saveTime
-	 *            保存的时间，单位：秒
+	 *            淇濆瓨鐨勬椂闂达紝鍗曚綅锛氱
 	 */
 	public void put(String key, Drawable value, int saveTime) {
 		put(key, Utils.drawable2Bitmap(value), saveTime);
 	}
 
 	/**
-	 * 读取 Drawable 数据
+	 * 璇诲彇 Drawable 鏁版嵁
 	 * 
 	 * @param key
-	 * @return Drawable 数据
+	 * @return Drawable 鏁版嵁
 	 */
 	public Drawable getAsDrawable(String key) {
 		if (getAsBinary(key) == null) {
@@ -530,10 +530,10 @@ public class ACache {
 	}
 
 	/**
-	 * 获取缓存文件
+	 * 鑾峰彇缂撳瓨鏂囦欢
 	 * 
 	 * @param key
-	 * @return value 缓存的文�?
+	 * @return value 缂撳瓨鐨勬枃浠?
 	 */
 	public File file(String key) {
 		File f = mCache.newFile(key);
@@ -543,25 +543,25 @@ public class ACache {
 	}
 
 	/**
-	 * 移除某个key
+	 * 绉婚櫎鏌愪釜key
 	 * 
 	 * @param key
-	 * @return 是否移除成功
+	 * @return 鏄惁绉婚櫎鎴愬姛
 	 */
 	public boolean remove(String key) {
 		return mCache.remove(key);
 	}
 
 	/**
-	 * 清除�?有数�?
+	 * 娓呴櫎鎵?鏈夋暟鎹?
 	 */
 	public void clear() {
 		mCache.clear();
 	}
 
 	/**
-	 * @title 缓存管理�?
-	 * @author 杨福海（michael�? www.yangfuhai.com
+	 * @title 缂撳瓨绠＄悊鍣?
+	 * @author 鏉ㄧ娴凤紙michael锛? www.yangfuhai.com
 	 * @version 1.0
 	 */
 	public class ACacheManager {
@@ -583,7 +583,7 @@ public class ACache {
 		}
 
 		/**
-		 * 计算 cacheSize和cacheCount
+		 * 璁＄畻 cacheSize鍜宑acheCount
 		 */
 		private void calculateCacheSizeAndCacheCount() {
 			new Thread(new Runnable() {
@@ -659,7 +659,7 @@ public class ACache {
 		}
 
 		/**
-		 * 移除旧的文件
+		 * 绉婚櫎鏃х殑鏂囦欢
 		 * 
 		 * @return
 		 */
@@ -699,27 +699,27 @@ public class ACache {
 	}
 
 	/**
-	 * @title 时间计算工具�?
-	 * @author 杨福海（michael�? www.yangfuhai.com
+	 * @title 鏃堕棿璁＄畻宸ュ叿绫?
+	 * @author 鏉ㄧ娴凤紙michael锛? www.yangfuhai.com
 	 * @version 1.0
 	 */
 	private static class Utils {
 
 		/**
-		 * 判断缓存的String数据是否到期
+		 * 鍒ゆ柇缂撳瓨鐨凷tring鏁版嵁鏄惁鍒版湡
 		 * 
 		 * @param str
-		 * @return true：到期了 false：还没有到期
+		 * @return true锛氬埌鏈熶簡 false锛氳繕娌℃湁鍒版湡
 		 */
 		private static boolean isDue(String str) {
 			return isDue(str.getBytes());
 		}
 
 		/**
-		 * 判断缓存的byte数据是否到期
+		 * 鍒ゆ柇缂撳瓨鐨刡yte鏁版嵁鏄惁鍒版湡
 		 * 
 		 * @param data
-		 * @return true：到期了 false：还没有到期
+		 * @return true锛氬埌鏈熶簡 false锛氳繕娌℃湁鍒版湡
 		 */
 		private static boolean isDue(byte[] data) {
 			String[] strs = getDateInfoFromDate(data);
@@ -811,7 +811,7 @@ public class ACache {
 		}
 
 		/*
-		 * Bitmap �? byte[]
+		 * Bitmap 鈫? byte[]
 		 */
 		private static byte[] Bitmap2Bytes(Bitmap bm) {
 			if (bm == null) {
@@ -823,7 +823,7 @@ public class ACache {
 		}
 
 		/*
-		 * byte[] �? Bitmap
+		 * byte[] 鈫? Bitmap
 		 */
 		private static Bitmap Bytes2Bimap(byte[] b) {
 			if (b.length == 0) {
@@ -833,30 +833,30 @@ public class ACache {
 		}
 
 		/*
-		 * Drawable �? Bitmap
+		 * Drawable 鈫? Bitmap
 		 */
 		private static Bitmap drawable2Bitmap(Drawable drawable) {
 			if (drawable == null) {
 				return null;
 			}
-			// �? drawable 的长�?
+			// 鍙? drawable 鐨勯暱瀹?
 			int w = drawable.getIntrinsicWidth();
 			int h = drawable.getIntrinsicHeight();
-			// �? drawable 的颜色格�?
+			// 鍙? drawable 鐨勯鑹叉牸寮?
 			Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
 					: Bitmap.Config.RGB_565;
-			// 建立对应 bitmap
+			// 寤虹珛瀵瑰簲 bitmap
 			Bitmap bitmap = Bitmap.createBitmap(w, h, config);
-			// 建立对应 bitmap 的画�?
+			// 寤虹珛瀵瑰簲 bitmap 鐨勭敾甯?
 			Canvas canvas = new Canvas(bitmap);
 			drawable.setBounds(0, 0, w, h);
-			// �? drawable 内容画到画布�?
+			// 鎶? drawable 鍐呭鐢诲埌鐢诲竷涓?
 			drawable.draw(canvas);
 			return bitmap;
 		}
 
 		/*
-		 * Bitmap �? Drawable
+		 * Bitmap 鈫? Drawable
 		 */
 		@SuppressWarnings("deprecation")
 		private static Drawable bitmap2Drawable(Bitmap bm) {

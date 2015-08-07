@@ -1,5 +1,5 @@
 package ustc.siplexy.miniplane;/**
- * Created by Ïè on 2015/7/29.
+ * Created by ç¿” on 2015/7/29.
  */
 
 import android.app.Application;

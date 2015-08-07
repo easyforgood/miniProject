@@ -1,5 +1,5 @@
 package ustc.siplexy.miniplane.api;/**
- * Created by Ïè on 2015/7/28.
+ * Created by ç¿” on 2015/7/28.
  */
 
 import android.util.Log;
@@ -22,11 +22,11 @@ import ustc.siplexy.miniplane.models.PaperPlaneDetail;
 
 /**
  * Created with Android Studio.
- * @TODO Ìá¹©¸ø Ç°¶ËµÄ½Ó¿Ú
+ * @TODO æä¾›ç»™ å‰ç«¯çš„æ¥å£
  * @Project:
  * @Package:
  * @Description:
- * @author: siplexypeng ÅóÏè
+ * @author: siplexypeng æœ‹ç¿”
  * @date:
  * @version: V1.0
  */
@@ -34,8 +34,19 @@ public class API {
     public static final String SUCCESS="success";
     public static final String ZERO="0";
 
+    public static void loginByQQ(String accessToken,UIListenerInterface<String> uiListener){
+        String reqUrl="user/login";
+        HashMap<String,String> params=new HashMap<>();
+        if (accessToken==null){
+            return ;
+        }
+        params.put("token",accessToken);
+        JSONHandler jsonHandler=new JSONHandler(uiListener,new StringParse());
+        VolleyService.requestJsonByPOST(reqUrl,params,jsonHandler,jsonHandler);
+    }
+
     /**
-     * @TODO µÇÂ½ POST
+     * @TODO ç™»é™† POST
      * @param phone
      * @param password
      * @param uiListener
@@ -58,7 +69,7 @@ public class API {
     }
 
     /**
-     * @TODO¡¡×¢²á POST
+     * @TODOã€€æ³¨å†Œ POST
      * @param phone
      * @param password
      * @param uiListener
@@ -80,23 +91,23 @@ public class API {
 
 
     /**
-     * @TODO ¼ñ·É»ú POST
+     * @TODO æ¡é£æœº POST
      * @param uiListener
      */
     public static void pickPlane(UIListenerInterface<List<PaperPlane>> uiListener){
         String reqUrl="plane/occupy";
         HashMap<String,String> params=new HashMap<>();
-        params.put("story_id","");
+        params.put("story_id", "");
         JSONHandler jsonHandler =new JSONHandler(uiListener,new HotPlaneResponse());
 
-        VolleyService.requestJsonByPOST(reqUrl,params , jsonHandler, jsonHandler);
+        VolleyService.requestJsonByPOST(reqUrl, params, jsonHandler, jsonHandler);
     }
     /**
-     * @TODO »ñÈ¡ÈÈÃÅ·É»ú GET
+     * @TODO è·å–çƒ­é—¨é£æœº GET
      *
-     * @param amount ÇëÇóĞÅÏ¢µÄÊıÁ¿
-     * @param offset ÇëÇóµÄÆ«ÒÆÁ¿
-     * @param uiListener List<PaperPlane>ÀàĞÍ
+     * @param amount è¯·æ±‚ä¿¡æ¯çš„æ•°é‡
+     * @param offset è¯·æ±‚çš„åç§»é‡
+     * @param uiListener List<PaperPlane>ç±»å‹
      *
      */
     public static void pickHotPlane(Integer amount,
@@ -114,10 +125,10 @@ public class API {
     }
 
     /**
-     * @TODO  »ñÈ¡ÎÄÕÂ¶ÎÂä ÇëÇó·É»ú¶ÎÂä  GET
-     * @param story_id ËùÔÚ¹ÊÊÂid
-     * @param amount Ã¿Ò³ÊıÁ¿
-     * @param offset Ò³Êı
+     * @TODO  è·å–æ–‡ç« æ®µè½ è¯·æ±‚é£æœºæ®µè½  GET
+     * @param story_id æ‰€åœ¨æ•…äº‹id
+     * @param amount æ¯é¡µæ•°é‡
+     * @param offset é¡µæ•°
      * @param uiListenerInterface List<PaperPlaneDetail>
      *
      */
@@ -144,7 +155,7 @@ public class API {
     }
 
     /**
-     * @TODO ÈÔ»Ø·É»ú GET
+     * @TODO ä»å›é£æœº GET
      * @param storyid
      * @param uiListener
      */
@@ -154,21 +165,21 @@ public class API {
         reqUrl=String.format(reqUrl, storyid);
        JSONHandler jsonHandler=
                 new JSONHandler(uiListener,new StringParse());
-        VolleyService.requestJsonByGET(reqUrl,null,jsonHandler,jsonHandler);
+        VolleyService.requestJsonByGET(reqUrl, null, jsonHandler, jsonHandler);
 
 
     }
 
     /**
-     * @TODO  ·Å·É·É»ú  ·¢ËÍ¶ÎÂä POST
-     * @info  ÕâÀïÈ«²¿²ÎÊı¶¼²»ÄÜÓÃnull Îª¿ÕÓÃ""±íÊ¾£¡£¡
-     * storyid Îª¿ÕÊ±£¬¾ÍÊÇµş·É»úµÄ²Ù×÷
-     * storyid ²»Îª¿ÕÊÇ£¬¾ÍÊÇĞøº½µÄ²Ù×÷
+     * @TODO  æ”¾é£é£æœº  å‘é€æ®µè½ POST
+     * @info  è¿™é‡Œå…¨éƒ¨å‚æ•°éƒ½ä¸èƒ½ç”¨null ä¸ºç©ºç”¨""è¡¨ç¤ºï¼ï¼
+     * storyid ä¸ºç©ºæ—¶ï¼Œå°±æ˜¯å é£æœºçš„æ“ä½œ
+     * storyid ä¸ä¸ºç©ºæ˜¯ï¼Œå°±æ˜¯ç»­èˆªçš„æ“ä½œ
      *
      *
-     * @param storyid ËùÔÚ·É»úµÄid
-     * @param title ±êÌâ
-     * @param content ÎÄÕÂÄÚÈİÄÚÈİ
+     * @param storyid æ‰€åœ¨é£æœºçš„id
+     * @param title æ ‡é¢˜
+     * @param content æ–‡ç« å†…å®¹å†…å®¹
      * @param uiListener
      *
      */
@@ -179,21 +190,24 @@ public class API {
         //start
         String reqUrl="plane/fly";
         Map<String,String> params=new HashMap<String, String>();
-
-        params.put("story_id",storyid==null?"":storyid);
-        params.put("title", title == null? "" : title);
-        params.put("content", content==null? "" : content);
+        try {
+            params.put("story_id", storyid == null ? "" : storyid);
+            params.put("title", title == null ? "" : title);
+            params.put("content", content == null ? "" :content);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         JSONHandler jsonHandler=
                 new JSONHandler(uiListener,new StringParse());
         VolleyService.requestJsonByPOST(reqUrl, params,jsonHandler , jsonHandler);
     }
 
     /**
-     * @TODO Òì²½ÇëÇóÍ¼Æ¬
-     * @param reqUrl ÇëÇóurl
-     * @param view °ó¶¨µÄimageview
-     * @param defaultImg Ä¬ÈÏÇé¿öÏÂµÄ×ÊÔ´ÎÄ¼ş
-     * @param faultImg ´íÎóÇé¿öÏÂµÄ×ÊÔ´ÎÄ¼ş
+     * @TODO å¼‚æ­¥è¯·æ±‚å›¾ç‰‡
+     * @param reqUrl è¯·æ±‚url
+     * @param view ç»‘å®šçš„imageview
+     * @param defaultImg é»˜è®¤æƒ…å†µä¸‹çš„èµ„æºæ–‡ä»¶
+     * @param faultImg é”™è¯¯æƒ…å†µä¸‹çš„èµ„æºæ–‡ä»¶
      */
     public static void getImg(String reqUrl,ImageView view,int defaultImg,int faultImg){
 
